@@ -1,13 +1,13 @@
-#ifndef GOOGLE_TRANSLATE_H
-#define GOOGLE_TRANSLATE_H
+#ifndef YOUDAO_TRANSLATE_H
+#define YOUDAO_TRANSLATE_H
 
 #include "base_translate.h"
 
-class GoogleTranslate : public BaseTranslate
+class YouDaoTranslate : public BaseTranslate
 {
 public:
-    explicit GoogleTranslate();
-    virtual ~GoogleTranslate();
+    explicit YouDaoTranslate();
+    virtual ~YouDaoTranslate();
 
     void Translate(const std::string& src, libTranslateDefine::LanguageCode targetCode = libTranslateDefine::zh_CN) override;
 
@@ -15,8 +15,6 @@ public:
 
 public:
     static size_t GetResponse(char *ptr, size_t size, size_t nmemb, void *userdata);
-
 };
 
-
-#endif //GOOGLE_TRANSLATE_H
+#endif  //YOUDAO_TRANSLATE_H

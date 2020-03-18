@@ -1,9 +1,5 @@
 #include "google_translate.h"
 #include "json/reader.h"
-#include <iostream>
-#include <fstream>
-#include <QString>
-#include <QDebug>
 
 namespace
 {
@@ -67,11 +63,6 @@ void GoogleTranslate::ProcessResponse(const std::string &response)
 size_t GoogleTranslate::GetResponse(char *ptr, size_t size, size_t nmemb, void *userdata)
 {
     std::string response(ptr, size*nmemb);
-
-    std::ofstream in;
-    in.open("111.txt", std::ofstream::out);
-    in<<response;
-    in.close();
 
     GoogleTranslate* googleTranslate = (GoogleTranslate*)userdata;
     googleTranslate->ProcessResponse(response);

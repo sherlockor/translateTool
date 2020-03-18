@@ -1,5 +1,6 @@
 #include "translate_factory.h"
 #include "google_translate.h"
+#include "youdao_translate.h"
 
 TranslateFactory::TranslateFactory()
 {
@@ -18,6 +19,9 @@ std::shared_ptr<BaseTranslate> TranslateFactory::GetTranslateInstance(TranslateF
     {
     case Google:
         baseTranslate = std::make_shared<GoogleTranslate>();
+        break;
+    case Youdao:
+        baseTranslate = std::make_shared<YouDaoTranslate>();
         break;
     default:
         baseTranslate = NULL;

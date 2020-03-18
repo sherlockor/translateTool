@@ -13,6 +13,7 @@ public:
     enum TranslatePlatform
     {
         Google = 0,
+        Youdao,
     };
 
     std::shared_ptr<BaseTranslate> GetTranslateInstance(TranslatePlatform platform) const;
