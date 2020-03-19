@@ -39,7 +39,7 @@ void YouDaoTranslate::Translate(const std::string &src, libTranslateDefine::Lang
     curl_easy_perform(m_curlHandle);
 }
 
-void YouDaoTranslate::ProcessResponse(const std::string &response)
+void YouDaoTranslate::ProcessResponse(const std::string &response) const
 {
     Json::Reader reader;
     Json::Value root;
@@ -51,11 +51,11 @@ void YouDaoTranslate::ProcessResponse(const std::string &response)
     Json::Value translateResult = root["translateResult"];
     if(0 == errorCode.asInt() && translateResult)
     {
-        Json::Value tgtValue = translateResult[0][0]["tgt"];
-        std::string tgt = tgtValue.asString();
-        if(m_callBack)
+        if(translateResult.isArray() && translateResult[0].isArray())
         {
-            m_callBack(tgt, m_userData);
+            Json::Value tgtValue = translateResult[0][0]["tgt"];
+            std::string tgt = tgtValue.asString();
+            CallBackFunction(tgt);
         }
     }
 }

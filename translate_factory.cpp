@@ -4,12 +4,10 @@
 
 TranslateFactory::TranslateFactory()
 {
-
 }
 
 TranslateFactory::~TranslateFactory()
 {
-
 }
 
 std::shared_ptr<BaseTranslate> TranslateFactory::GetTranslateInstance(TranslateFactory::TranslatePlatform platform) const

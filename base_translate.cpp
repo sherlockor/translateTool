@@ -31,12 +31,20 @@ void BaseTranslate::SetCallback(Callback callback, void *userData)
     m_userData = userData;
 }
 
-void BaseTranslate::Initlization()
+void BaseTranslate::CallBackFunction(const std::string &result) const
+{
+    if(m_callBack)
+    {
+        m_callBack(result, m_userData);
+    }
+}
+
+void BaseTranslate::GlobalInitlization()
 {
     curl_global_init(CURL_GLOBAL_ALL);
 }
 
-void BaseTranslate::Release()
+void BaseTranslate::GlobalRelease()
 {
     curl_global_cleanup();
 }

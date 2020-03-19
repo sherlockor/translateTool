@@ -13,7 +13,7 @@ void PrintResutl(const std::string& response, void* userData)
 
 int main(void)
 {
-    BaseTranslate::Initlization();
+    BaseTranslate::GlobalInitlization();
 
     TranslateFactory factory;
     std::shared_ptr<BaseTranslate> googleTranslte = factory.GetTranslateInstance(TranslateFactory::Google);
@@ -24,7 +24,7 @@ int main(void)
     youdaoTranslate->SetCallback(&PrintResutl, NULL);
     youdaoTranslate->Translate("支持全球27个语种的高质量互译服务");
 
-    BaseTranslate::Release();
+    BaseTranslate::GlobalRelease();
 
     return 0;
 }

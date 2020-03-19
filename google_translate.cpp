@@ -41,7 +41,7 @@ void GoogleTranslate::Translate(const std::string &src, libTranslateDefine::Lang
     curl_easy_perform(m_curlHandle);
 }
 
-void GoogleTranslate::ProcessResponse(const std::string &response)
+void GoogleTranslate::ProcessResponse(const std::string &response) const
 {
     Json::Reader reader;
     Json::Value root;
@@ -49,13 +49,14 @@ void GoogleTranslate::ProcessResponse(const std::string &response)
     {
         return;
     }
-    Json::Value sentences = root["sentences"][0];
-    if(sentences)
+    Json::Value sentences = root["sentences"];
+    if(sentences && sentences.isArray())
     {
-        std::string trans = sentences["trans"].asString();
-        if(m_callBack)
+        Json::Value result = sentences[0]["trans"];
+        if(result)
         {
-            m_callBack(trans, m_userData);
+            std::string trans = result.asString();
+            CallBackFunction(trans);
         }
     }
 }
