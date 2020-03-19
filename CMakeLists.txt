@@ -18,6 +18,3 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 set(CMAKE_BUILD_TYPE DEBUG)
-set(CMAKE_PREFIX_PATH $ENV{QTDIR})
-find_package(Qt5 COMPONENTS core)
-target_link_libraries(${PROJECT_NAME} Qt5::Core)
