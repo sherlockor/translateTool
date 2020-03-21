@@ -6,8 +6,9 @@
 #include <string>
 
 /*
- * @brief   回调函数类型
- * @author  sherlock_lin
+ * @brief       回调函数类型
+ * @author      sherlock_lin
+ * @param[in]   response    如果是执行文字翻译，则表示翻译结果；如果是阅读，则表示音频数据
  */
 typedef void(*Callback)(const std::string& response, void* userData);
 
@@ -28,6 +29,12 @@ public:
                                   libTranslateDefine::LanguageCode targetCode = libTranslateDefine::zh_CN) = 0;
 
     /*
+     * @brief       读单词
+     * @param[in]   src     需要读的单词
+     */
+    virtual void Read(const std::string& src) const = 0;
+
+    /*
      * @brief       设置回调函数，当得到翻译结果后，会调用回调函数
      * @param[in]   callback    回调函数指针
      * @param[in]   userData    用户自定义指针，会随着回调函数传回
@@ -41,6 +48,12 @@ public:
      * @author      sherlock_lin
      */
     virtual void ProcessResponse(const std::string& response) const = 0;
+
+    /*
+     * @brief   返回是否支持发音
+     * @author  sherlock_lin
+     */
+    virtual bool IsSupportVoice() const = 0;
 
 public:
     /*

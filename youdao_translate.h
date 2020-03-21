@@ -16,12 +16,20 @@ public:
      * @return      翻译结果，错误则为空
      * @author      sherlock_lin
      */
-    void Translate(const std::string& src, libTranslateDefine::LanguageCode targetCode = libTranslateDefine::zh_CN) override;
+    virtual void Translate(const std::string& src, libTranslateDefine::LanguageCode targetCode = libTranslateDefine::zh_CN) override;
 
-    void ProcessResponse(const std::string& response) const override;
+    virtual void Read(const std::string& src) const override;
+
+    virtual void ProcessResponse(const std::string& response) const override;
+
+    virtual bool IsSupportVoice() const override;
 
 public:
-    static size_t GetResponse(char *ptr, size_t size, size_t nmemb, void *userdata);
+    static size_t GetResponse(char *ptr, size_t size, size_t nmemb, void *userData);
+
+    static size_t GetVoiceResponse(char* ptr, size_t size, size_t nmemb, void* userData);
+
+    static size_t GetResponseHeader(char* buffer, size_t size, size_t nitems, void* userData);
 };
 
 #endif  //YOUDAO_TRANSLATE_H

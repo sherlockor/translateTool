@@ -42,6 +42,16 @@ void GoogleTranslate::Translate(const std::string &src, libTranslateDefine::Lang
     curl_easy_perform(m_curlHandle);
 }
 
+bool GoogleTranslate::IsSupportVoice() const
+{
+    return false;
+}
+
+void GoogleTranslate::Read(const std::string &src) const
+{
+    //google不支持单词发音
+}
+
 void GoogleTranslate::ProcessResponse(const std::string &response) const
 {
     Json::CharReaderBuilder builder;
@@ -69,8 +79,10 @@ void GoogleTranslate::ProcessResponse(const std::string &response) const
 size_t GoogleTranslate::GetResponse(char *ptr, size_t size, size_t nmemb, void *userdata)
 {
     std::string response(ptr, size*nmemb);
-
-    GoogleTranslate* googleTranslate = (GoogleTranslate*)userdata;
-    googleTranslate->ProcessResponse(response);
+    GoogleTranslate* googleTranslate = (GoogleTranslate*)(userdata);
+    if(googleTranslate)
+    {
+        googleTranslate->ProcessResponse(response);
+    }
     return size*nmemb;
 }

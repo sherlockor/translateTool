@@ -16,9 +16,13 @@ public:
      * @return      翻译结果，错误则为空
      * @author      sherlock_lin
      */
-    void Translate(const std::string& src, libTranslateDefine::LanguageCode targetCode = libTranslateDefine::zh_CN) override;
+    virtual void Translate(const std::string& src, libTranslateDefine::LanguageCode targetCode = libTranslateDefine::zh_CN) override;
 
-    void ProcessResponse(const std::string& response) const override;
+    virtual bool IsSupportVoice() const override;
+
+    virtual void Read(const std::string& src) const override;
+
+    virtual void ProcessResponse(const std::string& response) const override;
 
 public:
     static size_t GetResponse(char *ptr, size_t size, size_t nmemb, void *userdata);

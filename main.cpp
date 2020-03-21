@@ -8,7 +8,10 @@ using namespace std;
 
 void PrintResutl(const std::string& response, void* userData)
 {
-    std::cout<<response<<endl;
+    ofstream stream;
+    stream.open("test.mpeg", std::ofstream::binary | std::ofstream::app);
+    stream.write(response.c_str(), response.length());
+    stream.close();
 }
 
 int main(void)
@@ -22,7 +25,8 @@ int main(void)
 
     std::shared_ptr<BaseTranslate> youdaoTranslate = factory.GetTranslateInstance(TranslateFactory::Youdao);
     youdaoTranslate->SetCallback(&PrintResutl, NULL);
-    youdaoTranslate->Translate("支持全球27个语种的高质量互译服务");
+    //youdaoTranslate->Translate("支持全球27个语种的高质量互译服务");
+    youdaoTranslate->Read("我是谁");
 
     BaseTranslate::GlobalRelease();
 

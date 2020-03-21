@@ -1,7 +1,10 @@
-project(libTranslate)
+project(Translate)
 cmake_minimum_required(VERSION 2.8)
 aux_source_directory(. SRC_LIST)
 add_executable(${PROJECT_NAME} ${SRC_LIST})
+#add_library(${PROJECT_NAME} google_translate.cpp base_translate.cpp youdao_translate.cpp translate_factory.cpp)
+#set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/out/)
+#set_target_properties(${PROJECT_NAME} PROPERTIES VERSION 1.1 SOVERSION 1)
 
 add_definitions(-std=c++11)
 
