@@ -1,5 +1,6 @@
 #include "google_translate.h"
 #include "json/reader.h"
+#include <memory>
 
 namespace
 {
@@ -43,10 +44,14 @@ void GoogleTranslate::Translate(const std::string &src, libTranslateDefine::Lang
 
 void GoogleTranslate::ProcessResponse(const std::string &response) const
 {
-    Json::Reader reader;
+    Json::CharReaderBuilder builder;
+    std::unique_ptr<Json::CharReader> charReader(builder.newCharReader());
+
     Json::Value root;
-    if(!reader.parse(response, root))
+    JSONCPP_STRING errorStr;
+    if(!charReader->parse(response.c_str(), response.c_str() + response.length(), &root, &errorStr))
     {
+        //解析错误
         return;
     }
     Json::Value sentences = root["sentences"];

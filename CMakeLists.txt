@@ -16,5 +16,4 @@ target_link_libraries(${PROJECT_NAME}
                         ${PROJECT_SOURCE_DIR}/libs/libcurl.dll.a
                         ${PROJECT_SOURCE_DIR}/libs/libjsoncpp.a
 )
-
 set(CMAKE_BUILD_TYPE DEBUG)
