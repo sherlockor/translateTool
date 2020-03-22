@@ -1,6 +1,6 @@
 #include "base_translate.h"
 
-BaseTranslate::BaseTranslate() :m_curlHandle(NULL), m_headerList(NULL), m_callBack(NULL), m_userData(NULL)
+BaseTranslate::BaseTranslate() :m_curlHandle(NULL), m_headerList(NULL), m_resultCallBack(NULL), m_resultUserData(NULL)
 {
     m_curlHandle = curl_easy_init();
     if(m_curlHandle && !m_headerList)
@@ -25,17 +25,31 @@ BaseTranslate::~BaseTranslate()
     }
 }
 
-void BaseTranslate::SetCallback(Callback callback, void *userData)
+void BaseTranslate::SetResultCallback(Callback callback, void *userData)
 {
-    m_callBack = callback;
-    m_userData = userData;
+    m_resultCallBack = callback;
+    m_resultUserData = userData;
 }
 
-void BaseTranslate::CallBackFunction(const std::string &result) const
+void BaseTranslate::SetVoiceCallback(Callback callback, void *userData)
 {
-    if(m_callBack)
+    m_voiceCallBack = callback;
+    m_voiceUserData = userData;
+}
+
+void BaseTranslate::CallBackResultFunction(const std::string &result) const
+{
+    if(m_resultCallBack)
     {
-        m_callBack(result, m_userData);
+        m_resultCallBack(result, m_resultUserData);
+    }
+}
+
+void BaseTranslate::CallBackVoiceFunction(const std::string &voiceStreamData) const
+{
+    if(m_voiceCallBack)
+    {
+        m_voiceCallBack(voiceStreamData, m_voiceUserData);
     }
 }
 

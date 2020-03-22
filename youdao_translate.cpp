@@ -78,7 +78,7 @@ void YouDaoTranslate::ProcessResponse(const std::string &response) const
         {
             Json::Value tgtValue = translateResult[0][0]["tgt"];
             std::string tgt = tgtValue.asString();
-            CallBackFunction(tgt);
+            CallBackResultFunction(tgt);
         }
     }
 }
@@ -106,7 +106,7 @@ size_t YouDaoTranslate::GetVoiceResponse(char *ptr, size_t size, size_t nmemb, v
     YouDaoTranslate* youdaoTranslate = (YouDaoTranslate*)userData;
     if(youdaoTranslate)
     {
-        youdaoTranslate->CallBackFunction(result);
+        youdaoTranslate->CallBackVoiceFunction(result);
     }
 
     return size * nmemb;

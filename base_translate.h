@@ -40,7 +40,15 @@ public:
      * @param[in]   userData    用户自定义指针，会随着回调函数传回
      * @author      sherlock_lin
      */
-    virtual void SetCallback(Callback callback, void* userData);
+    virtual void SetResultCallback(Callback callback, void* userData);
+
+    /*
+     * @brief       设置回调函数，当得到发音后，会调用回调函数
+     * @param[in]   callback    回调函数指针
+     * @param[in]   userData    用户自定义指针，会随着回调函数传回
+     * @author      sherlock_lin
+     */
+    virtual void SetVoiceCallback(Callback callback, void* userData);
 
     /*
      * @brief       处理response
@@ -70,16 +78,28 @@ public:
 
 protected:
     /*
-     * @brief   调用回调函数
+     * @brief   调用翻译结果回调函数
      * @author  sherlock_lin
      */
-    virtual void CallBackFunction(const std::string& result) const;
+    virtual void CallBackResultFunction(const std::string& result) const;
+
+    /*
+     * @brief   调用发言回调函数
+     * @author  sherlock_lin
+     */
+    virtual void CallBackVoiceFunction(const std::string& voiceStreamData) const;
 
 protected:
     CURL* m_curlHandle;
     curl_slist* m_headerList;
-    Callback m_callBack;
-    void* m_userData;
+
+    //设定用于获取翻译结果的回调函数
+    Callback m_resultCallBack;
+    void* m_resultUserData;
+
+    //设定用于获取发音的回调函数
+    Callback m_voiceCallBack;
+    void* m_voiceUserData;
 };
 
 

@@ -20,11 +20,11 @@ int main(void)
 
     TranslateFactory factory;
     std::shared_ptr<BaseTranslate> googleTranslte = factory.GetTranslateInstance(TranslateFactory::Google);
-    googleTranslte->SetCallback(&PrintResutl, NULL);
+    googleTranslte->SetResultCallback(&PrintResutl, NULL);
     googleTranslte->Translate("my boy friend is handsome", libTranslateDefine::zh_CN);
 
     std::shared_ptr<BaseTranslate> youdaoTranslate = factory.GetTranslateInstance(TranslateFactory::Youdao);
-    youdaoTranslate->SetCallback(&PrintResutl, NULL);
+    youdaoTranslate->SetVoiceCallback(&PrintResutl, NULL);
     //youdaoTranslate->Translate("支持全球27个语种的高质量互译服务");
     youdaoTranslate->Read("我是谁");
 

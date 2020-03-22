@@ -71,7 +71,7 @@ void GoogleTranslate::ProcessResponse(const std::string &response) const
         if(result)
         {
             std::string trans = result.asString();
-            CallBackFunction(trans);
+            CallBackResultFunction(trans);
         }
     }
 }
